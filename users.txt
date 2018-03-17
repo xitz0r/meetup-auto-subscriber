@@ -1,2 +1,2 @@
-# Here right API_KEY and name
-# Example: apikey123 Bruno
+# Here right name and API_KEY
+# Example: Bruno apikey123

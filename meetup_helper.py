@@ -21,7 +21,7 @@ def init_meetup_users(list):
             if line[0] == '#':
                 continue    # comment
             else:
-                api, name = line.split(' ')
+                name, api = line.split(' ')
                 user = MeetupUser(api, name)
                 list.append(user)
 
@@ -75,7 +75,7 @@ if __name__ == '__main__':
 
             for user in MEETUP_USERS:
                 rsvped = False
-                url = 'https://api.meetup.com/' + GROUP_NAME + '/events/' + key + '/rsvps?sign=true&key=' + user.key + '&response=yes'
+                url = 'https://api.meetup.com/' + GROUP_NAME + '/events/' + key + '/rsvps?sign=true&key=' + user.api_key + '&response=yes'
 
                 while not rsvped:
                     try:
