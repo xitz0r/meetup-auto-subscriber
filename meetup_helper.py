@@ -23,6 +23,7 @@ def init_meetup_users(list):
             else:
                 try:
                     name, api = line.split(' ')
+                    api = api[:-1] # Removing \n
                     user = MeetupUser(api, name)
                     list.append(user)
                 except ValueError:
