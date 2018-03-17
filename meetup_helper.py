@@ -90,8 +90,8 @@ if __name__ == '__main__':
                             send_telegram('I just registered ' + user.name + ' to ' + events[key]['name'] + ' on ' + str(t))
                     except Exception as error:
                         print(error)
-                    finally:
                         time.sleep(300)
+
 
         send_telegram("I don't have any more events, stop being lazy and write better code!!!")
         break
