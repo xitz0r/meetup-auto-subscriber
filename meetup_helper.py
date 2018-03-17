@@ -66,13 +66,14 @@ if __name__ == '__main__':
 
         for event in j:
             event_id = event['id']
+            event_time = event['local_date']
 
             if 'Sunday Outdoor Football (Weekly)' in event['name'] and event_id not in events.keys():
                 events[event_id] = event
 
         for key in events:
             print(events[key])
-            send_telegram("I'm trying to rsvp to " + events[key]['name'] + ". I'll let you know when I have any updates :)")
+            send_telegram("I'm trying to rsvp to " + events[key]['name'] + " on " + event_time)
 
             for user in MEETUP_USERS:
                 rsvped = False
@@ -85,7 +86,7 @@ if __name__ == '__main__':
                         j = request.urlopen(req, data=d)
                         if j.getcode() == 201 or j.getcode() == '201':
                             rsvped = True
-                            send_telegram('I just registered ' + user.name + ' to ' + events[key]['name'])
+                            send_telegram('I just registered ' + user.name + ' to ' + events[key]['name'] + ' on ' + event_time)
                     except Exception as error:
                         print(error)
                         time.sleep(300)
