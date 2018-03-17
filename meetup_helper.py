@@ -4,12 +4,8 @@ import time
 import sys
 from urllib import request, parse
 
-
-API_KEY = ''
-GROUP_NAME = ''
+global API_KEY, GROUP_NAME, BOT_TOKEN, CHAT_ID
 EVENT_FILTER = ''
-BOT_TOKEN = ''
-CHAT_ID = ''
 
 
 def send_telegram(text):
@@ -20,7 +16,7 @@ def send_telegram(text):
                     )
 
 if __name__ == '__main__':
-    TOKEN = sys.argv[1]
+    BOT_TOKEN = sys.argv[1]
     API_KEY = sys.argv[2]
     CHAT_ID = sys.argv[3]
     GROUP_NAME = sys.argv[4]
