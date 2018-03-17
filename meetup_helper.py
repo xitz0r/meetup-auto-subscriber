@@ -23,7 +23,8 @@ def init_meetup_users(list):
             else:
                 try:
                     name, api = line.split(' ')
-                    api = api[:-1] # Removing \n
+                    if api[-1] == '\n':
+                        api = api[:-1] # Removing \n
                     user = MeetupUser(api, name)
                     list.append(user)
                 except ValueError:
@@ -65,17 +66,13 @@ if __name__ == '__main__':
 
         for event in j:
             event_id = event['id']
-            t = datetime.datetime.fromtimestamp(event['time']/1000).strftime('%Y-%m-%d %H:%M:%S')
 
-            print(t)
-
-            if 'Football' in event['name'] and event_id not in events.keys() and '13:' in t:
+            if 'Sunday Outdoor Football (Weekly)' in event['name'] and event_id not in events.keys():
                 events[event_id] = event
 
         for key in events:
             print(events[key])
-            t = datetime.datetime.fromtimestamp(events[key]['time']/1000).strftime('%Y-%m-%d %H:%M:%S')
-            send_telegram("I'm trying to rsvp to " + events[key]['name'] + " on " + t + ". I'll let you know when I have any updates :)")
+            send_telegram("I'm trying to rsvp to " + events[key]['name'] + ". I'll let you know when I have any updates :)")
 
             for user in MEETUP_USERS:
                 rsvped = False
@@ -88,7 +85,7 @@ if __name__ == '__main__':
                         j = request.urlopen(req, data=d)
                         if j.getcode() == 201 or j.getcode() == '201':
                             rsvped = True
-                            send_telegram('I just registered ' + user.name + ' to ' + events[key]['name'] + ' on ' + str(t))
+                            send_telegram('I just registered ' + user.name + ' to ' + events[key]['name'])
                     except Exception as error:
                         print(error)
                         time.sleep(300)
