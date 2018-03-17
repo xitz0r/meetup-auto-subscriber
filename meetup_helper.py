@@ -21,9 +21,12 @@ def init_meetup_users(list):
             if line[0] == '#':
                 continue    # comment
             else:
-                name, api = line.split(' ')
-                user = MeetupUser(api, name)
-                list.append(user)
+                try:
+                    name, api = line.split(' ')
+                    user = MeetupUser(api, name)
+                    list.append(user)
+                except ValueError:
+                    print('Ignoring line', line)
 
 
 def send_telegram(text):
