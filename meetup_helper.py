@@ -66,13 +66,13 @@ if __name__ == '__main__':
 
         for event in j:
             event_id = event['id']
-            event_time = event['local_date']
 
             if 'Sunday Outdoor Football (Weekly)' in event['name'] and event_id not in events.keys():
                 events[event_id] = event
 
         for key in events:
             print(events[key])
+            event_time = events[key]['local_date']
             send_telegram("I'm trying to rsvp to " + events[key]['name'] + " on " + event_time)
 
             for user in MEETUP_USERS:
